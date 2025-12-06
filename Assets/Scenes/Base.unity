@@ -152,10 +152,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scenes:
-  - scene_name: Additive1
-    scene_ref: {fileID: 102900000, guid: 84add671e44075742aac80623a3060d3, type: 3}
-  - scene_name: Additive2
-    scene_ref: {fileID: 102900000, guid: ba006ef3dea61f74693e4379b22fc3b2, type: 3}
+  - {fileID: 102900000, guid: 84add671e44075742aac80623a3060d3, type: 3}
+  - {fileID: 102900000, guid: ba006ef3dea61f74693e4379b22fc3b2, type: 3}
+  onSceneLoadedCallback:
+    m_PersistentCalls:
+      m_Calls: []
+  onSceneUnloadedCallback:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &166036012
 Transform:
   m_ObjectHideFlags: 0
@@ -273,7 +277,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1818238161}
   - component: {fileID: 1818238160}
-  - component: {fileID: 1818238159}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -281,23 +284,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1818238159
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1818238158}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a599e9cf365caba4c8a30f0527deeb2f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scenes:
-  - scene_name: Additive1
-    scene_ref: {fileID: 102900000, guid: 84add671e44075742aac80623a3060d3, type: 3}
-  - scene_name: Additive2
-    scene_ref: {fileID: 102900000, guid: ba006ef3dea61f74693e4379b22fc3b2, type: 3}
 --- !u!108 &1818238160
 Light:
   m_ObjectHideFlags: 0
