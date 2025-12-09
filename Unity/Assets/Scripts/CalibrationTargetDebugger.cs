@@ -182,4 +182,13 @@ public class CalibrationTargetDebugger : MonoBehaviour
         // Re-enable ability to run through coroutine
         _is_active = false;
     }
+
+    public void ToggleTargets()
+    {
+        for(int i = 0; i < targets.Count; i++)
+        {
+            GameObject target = targets[i].gameObject;
+            target.SetActive(!target.activeInHierarchy);
+        }
+    }
 }
