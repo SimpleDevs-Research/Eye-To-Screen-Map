@@ -2,6 +2,47 @@ import os
 import shutil
 import numpy as np
 import cv2
+import string
+import easyocr
+reader = easyocr.Reader(['en'])
+
+fourcc_to_ext = {
+    # --- MP4 container codecs ---
+    "mp4v": ".mp4",    # MPEG-4 Part 2
+    "avc1": ".mp4",    # H.264 baseline/main/high
+    "H264": ".mp4",    # alt H.264 tag
+    "h264": ".mp4",
+    "X264": ".mp4",
+    "H265": ".mp4",    # H.265/HEVC
+    "HEVC": ".mp4",
+    
+    # --- AVI container codecs ---
+    "XVID": ".avi",
+    "DIVX": ".avi",
+    "DX50": ".avi",
+    "MJPG": ".avi",    # Motion JPEG
+    "HFYU": ".avi",    # HuffYUV
+    "FFV1": ".avi",    # Lossless FFmpeg codec
+    "I420": ".avi",
+    "YV12": ".avi",
+    
+    # --- MOV container codecs (common QuickTime tags) ---
+    "avc1": ".mov",    # H.264 inside MOV
+    "mp4v": ".mov",    # sometimes used inside MOV
+    "jpeg": ".mov",    # MJPEG inside MOV
+    "prores": ".mov",
+    "apcn": ".mov",    # ProRes 422
+    "apch": ".mov",    # ProRes 422 HQ
+    "apco": ".mov",    # ProRes 422 Proxy
+    "apcs": ".mov",    # ProRes 422 LT
+    "ap4h": ".mov",    # ProRes 4444
+    
+    # --- Matroska (MKV) container codecs ---
+    "H265": ".mkv",
+    "HEVC": ".mkv",
+    "VP80": ".mkv",    # VP8
+    "VP90": ".mkv",    # VP9
+}
 
 # ------------------------------------------------------------
 # HELPER FUNCTIONS : Not core functions, can be used anywhere
@@ -76,3 +117,46 @@ def estimate_template_from_image(src_img,
     # Print and return
     if verbose: print(f"# Detected Bounding Boxes: {len(bboxes)}")
     return bboxes
+
+# === Checks whether a provided string value can be parsed as an integer
+#   Example:
+#   is_int = check_int("1123") <-- returns TRUE
+def check_int(s:str):
+    try: int(s)
+    except ValueError: return False
+    else: return True
+
+# === Checks for a frame number in a provided image. Handles only raw video frames
+# Returns the estimated frame number, if it's an int, and the outputted frames (if toggled) ===
+#   Example:
+# 
+def check_frame_number(
+        frame, crop_min, crop_max,
+        threshold:int=125,
+        return_frames:bool=True ):
+    # Cropping (old formula: crop_h[0]:crop_h[1], crop_w[0]:crop_w[1])
+    crop = frame[crop_min[1]:crop_max[1], crop_min[0]:crop_max[0]]
+    # Grayscale & Binary Thresholding for easier processing
+    grayscale = cv2.cvtColor(crop, cv2.COLOR_BGR2GRAY)
+    thr = cv2.threshold(grayscale, threshold, 255, cv2.THRESH_BINARY)[1]
+    # OCR
+    screen_text = reader.readtext(thr)
+    conf_text = screen_text[0][1]
+    is_int = check_int(conf_text)
+    if return_frames:
+        return conf_text, is_int, crop, grayscale, thr
+    return conf_text, is_int
+
+# === Attempt to interpret the fourcc of an input video
+def derive_fourcc_codec(cap, verbose:bool=True):
+    fourcc_int = int(cap.get(cv2.CAP_PROP_FOURCC))
+    f = [ chr((fourcc_int >> (8 * i)) & 0xFF) for i in range(4) ]
+    codec = "".join(f)
+    
+    # Validate: must be printable ASCII
+    if all(c in string.printable for c in codec):   
+        if verbose: print("Detected codec:", codec)
+    else:
+        if verbose: print("Invalid codec detected, using mp4v instead")
+        codec = "mp4v"
+    return codec, fourcc_to_ext[codec]
