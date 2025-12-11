@@ -51,7 +51,7 @@ This step is a bit more difficult due to the inherent problem of mapping video f
 
 ### Unity Build:
 
-Please read [our Unity documentation]() for further details on how to run this repository in Unity.
+Please read [our Unity documentation](./Unity/Assets/README.md) for further details on how to run this repository in Unity.
 
 - **Directory**: `./Unity/`
 - **Unity Version**: `2022.3.46f1`

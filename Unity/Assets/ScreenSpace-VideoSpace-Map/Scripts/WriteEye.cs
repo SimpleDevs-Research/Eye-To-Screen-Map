@@ -2,31 +2,41 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(OVREyeGaze))]
 public class WriteEye : MonoBehaviour
 {
-    public OVREyeGaze eye_gaze_ref;
+    private OVREyeGaze eye_gaze_ref;    // Will be set at Awake
+
+    [Header("=== Settings ===")]
     public Camera center_eye_ref;
     public Camera left_eye_ref;
     public Camera right_eye_ref;
     public CSVWriter writer;
 
-    // Start is called before the first frame update
-    void Start() {
-        if (AdditiveSceneManager.Instance != null)
-        {
-            GameObject e;
-            if (AdditiveSceneManager.Instance.TryGetRef("center_eye", out e)) center_eye_ref = e.GetComponent<Camera>();
-            if (AdditiveSceneManager.Instance.TryGetRef("left_eye", out e)) left_eye_ref = e.GetComponent<Camera>();
-            if (AdditiveSceneManager.Instance.TryGetRef("right_eye", out e)) right_eye_ref = e.GetComponent<Camera>();
-            if (AdditiveSceneManager.Instance.TryGetRef("left_eye_gaze", out e)) eye_gaze_ref = e.GetComponent<OVREyeGaze>();
-            if (center_eye_ref != null && left_eye_ref != null && right_eye_ref != null && eye_gaze_ref != null) {
-                if (OVRPlugin.eyeTrackingSupported && OVRPlugin.eyeTrackingEnabled)
-                {
-                    Debug.Log($"Position Writer for {gameObject.name} initialized!");
-                    writer.Initialize();      
-                }
-            }
+    private void Awake() {
+        // Set reference to OVREyeGaze
+        eye_gaze_ref = GetComponent<OVREyeGaze>();
+    }
+
+    public void EnableWriter()
+    {
+        if (writer.is_active) {
+            Debug.Log("Writer already enabled!");
+            return;
         }
+        Debug.Log("Initializing eye gaze writer!");
+        writer.Initialize();
+    }
+
+    public void DisableWriter()
+    {
+        if (!writer.is_active)
+        {
+            Debug.Log("Writer is already disabled");
+            return;
+        }
+        Debug.Log("Disabling eye gaze writer!");
+        writer.Disable();
     }
 
     void Update()

@@ -12,6 +12,7 @@ public class Calibration : MonoBehaviour
     public Camera center_eye_ref;
     public Camera right_eye_ref;
     public Transform gaze_target_prefab;
+    public Transform gaze_target_parent;
 
     [Header("=== Results Writing ===")]
     public CSVWriter writer;
@@ -63,9 +64,16 @@ public class Calibration : MonoBehaviour
 
         // Instantiate
         Transform t = Instantiate(gaze_target_prefab, center_eye_ref.transform.position + v, Quaternion.LookRotation(-v)) as Transform;
+        
+        // Modify calibration target settings
         CalibrationTarget ct = t.GetComponent<CalibrationTarget>();
         if (ct != null) ct.init_rotation = Quaternion.LookRotation(-v);
-        t.SetParent(center_eye_ref.transform);
+
+        // Set the parent
+        Transform p = (gaze_target_parent != null) 
+            ? gaze_target_parent
+            : center_eye_ref.transform;
+        t.SetParent(p);
 
         // Add to list of instantiated targets
         targets.Add(t);
