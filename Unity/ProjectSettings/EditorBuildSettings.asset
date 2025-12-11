@@ -12,10 +12,10 @@ EditorBuildSettings:
     path: Assets/Tracking/Scenes/LensCorrection.unity
     guid: b014cb46197d6af48bb6be80f432c252
   - enabled: 1
-    path: Assets/Eye-To-Screen-Map/Scenes/Base.unity
+    path: Assets/ScreenSpace-VideoSpace-Map/Scenes/Base.unity
     guid: 72e428f29f520af449709b324a5d4240
   - enabled: 1
-    path: Assets/Eye-To-Screen-Map/Scenes/Cube.unity
+    path: Assets/ScreenSpace-VideoSpace-Map/Scenes/Cube.unity
     guid: c35f66cfb94e24976b459ee665bf6896
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 4478419d75759e44e800b81324ef7afa, type: 2}
