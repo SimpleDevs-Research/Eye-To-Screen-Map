@@ -55,6 +55,7 @@ public class WriteEye : MonoBehaviour
         Vector3 right_screen_pos = right_eye_ref.WorldToScreenPoint(world_pos);
 
         writer.AddPayload(frame);
+        writer.AddPayload(IPDMeasurer.Instance.iipd);
         writer.AddPayload(world_pos);
         writer.AddPayload(center_screen_pos);
         writer.AddPayload(left_screen_pos);

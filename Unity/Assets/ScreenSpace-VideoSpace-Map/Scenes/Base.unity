@@ -1849,6 +1849,7 @@ GameObject:
   - component: {fileID: 166036013}
   - component: {fileID: 166036014}
   - component: {fileID: 166036015}
+  - component: {fileID: 166036016}
   m_Layer: 0
   m_Name: AdditiveSceneManager
   m_TagString: Untagged
@@ -1983,6 +1984,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dirName: sample
   kChars: 700
+--- !u!114 &166036016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 166036010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27dc816e173f7b042a80bdda88e6e749, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  left_eye_ref: {fileID: 1651653802}
+  right_eye_ref: {fileID: 1864276102}
+  _ipd: 0
+  textboxes:
+  - textbox: {fileID: 0}
+    print_type: 1
+  - textbox: {fileID: 0}
+    print_type: 1
 --- !u!1 &170296696
 GameObject:
   m_ObjectHideFlags: 0
@@ -8175,6 +8196,7 @@ MonoBehaviour:
     append_zero_to_filename: 0
     columns:
     - frame
+    - ipd
     - world_pos_x
     - world_pos_y
     - world_pos_z
@@ -19145,6 +19167,7 @@ MonoBehaviour:
     columns:
     - frame
     - timestamp
+    - ipd
     - event
     - target_number
     - world_pos_x
@@ -21467,6 +21490,7 @@ MonoBehaviour:
     append_zero_to_filename: 0
     columns:
     - frame
+    - ipd
     - world_pos_x
     - world_pos_y
     - world_pos_z

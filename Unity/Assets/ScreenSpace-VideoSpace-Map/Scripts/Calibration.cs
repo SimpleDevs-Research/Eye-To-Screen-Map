@@ -115,8 +115,10 @@ public class Calibration : MonoBehaviour
         // Writer first line
         float start_frame = FrameCount.Instance.frame_count;
         float start_time = Time.time;
+        int ipd = IPDMeasurer.Instance.iipd;
         writer.AddPayload(start_frame);   // frame #
         writer.AddPayload(start_time);    // timestamp
+        writer.AddPayload(ipd);           // IPD
         writer.AddPayload("Start");       // event
         writer.AddPayload("");            // target_number
         writer.AddPayload(Vector3.zero);  // world position
@@ -140,6 +142,7 @@ public class Calibration : MonoBehaviour
             // Write to event
             writer.AddPayload(FrameCount.Instance.frame_count); // frame #
             writer.AddPayload(Time.time - start_time);    // timestamp
+            writer.AddPayload(IPDMeasurer.Instance.iipd);   // IPD
             writer.AddPayload("Target");             // event
             writer.AddPayload(i);                    // target number
             writer.AddPayload(t.position);          // world_pos
@@ -156,6 +159,7 @@ public class Calibration : MonoBehaviour
         // Write final line
         writer.AddPayload(FrameCount.Instance.frame_count); // frame #
         writer.AddPayload(Time.time - start_time);    // timestamp
+        writer.AddPayload(IPDMeasurer.Instance.ipd);    // IPD
         writer.AddPayload("End");         // event
         writer.AddPayload("");            // target_number
         writer.AddPayload(Vector3.zero);  // world position
