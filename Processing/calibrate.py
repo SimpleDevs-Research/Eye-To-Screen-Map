@@ -29,6 +29,7 @@ def calibrate_trial(trial:Trial,
                     targets_filename:str,
                     vr_x_colname:str="left_screen_pos_x",
                     vr_y_colname:str="left_screen_pos_y",
+                    video_time_threshold:float=35,
                     validate:bool=True,
                     verbose:bool=True):
         
@@ -57,7 +58,9 @@ def calibrate_trial(trial:Trial,
         pbar.set_description(f"Setting up video calibration frame extraction...")
         cap = cv2.VideoCapture(video_filepath)  # Get a cpature window
         assert cap.isOpened(), f"Could not open video '{video_filename}'"
-
+        
+        fps = cap.get(cv2.CAP_PROP_FPS)
+        frame_limit = int(video_time_threshold * fps)   # 45 seconds → frame index
         bbox_min, bbox_max = ocr.frame_count_bounding_box(video_filepath) # bounding box for ocr
         frames = []                             # Initialize collection of frames
         pbar.update(1)
@@ -87,6 +90,10 @@ def calibrate_trial(trial:Trial,
             # Once we've confirmed we've hit all the targets, we bail
             if target_number_index == len(target_frame_keys):
                 if verbose: print(f"\tAll target reference frames detected. Ending frame analysis.")
+                break
+            fidx += 1
+            if fidx >= frame_limit:
+                if verbose: print("Reached video time threshold for calibration. Ending frame analysis.")
                 break
         cap.release()   # Release capture
         assert len(frames) > 0, "No frames detected! Terminating early"

@@ -7,6 +7,7 @@ public class EyeTrackingMonitor : MonoBehaviour
 {   
     public static EyeTrackingMonitor Instance;
 
+    public UnityEvent OnEyeTrackingPermissionGranted;
     public UnityEvent OnEyeTrackingActivated;
     public UnityEvent OnEyeTrackingDeactivated;
 
@@ -53,6 +54,7 @@ public class EyeTrackingMonitor : MonoBehaviour
         if (permissionId == OVRPermissionsRequester.EyeTrackingPermission) {
             Debug.Log("[EyeTrackingMonitor] Permission granted for eye tracking.");
             // Permission granted; next poll will detect actual activation
+            OnEyeTrackingPermissionGranted?.Invoke();
         }
     }
 }

@@ -1935,6 +1935,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29c9d6fbb529042748e05d994162cda6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnEyeTrackingPermissionGranted:
+    m_PersistentCalls:
+      m_Calls: []
   OnEyeTrackingActivated:
     m_PersistentCalls:
       m_Calls:
@@ -1964,31 +1967,7 @@ MonoBehaviour:
         m_CallState: 2
   OnEyeTrackingDeactivated:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 715321635}
-        m_TargetAssemblyTypeName: WriteEye, Assembly-CSharp
-        m_MethodName: DisableWriter
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1936720611}
-        m_TargetAssemblyTypeName: WriteEye, Assembly-CSharp
-        m_MethodName: DisableWriter
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   poll_delay: 0.5
 --- !u!114 &166036015
 MonoBehaviour:

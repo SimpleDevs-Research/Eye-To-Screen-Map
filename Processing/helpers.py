@@ -141,8 +141,11 @@ def check_frame_number(
     thr = cv2.threshold(grayscale, threshold, 255, cv2.THRESH_BINARY)[1]
     # OCR
     screen_text = reader.readtext(thr)
-    conf_text = screen_text[0][1]
-    is_int = check_int(conf_text)
+    conf_text = None
+    is_int = False
+    if len(screen_text) > 0:
+        conf_text = screen_text[0][1]
+        is_int = check_int(conf_text)
     if return_frames:
         return conf_text, is_int, crop, grayscale, thr
     return conf_text, is_int
