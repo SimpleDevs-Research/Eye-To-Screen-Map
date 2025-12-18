@@ -17,6 +17,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/ScreenSpace-VideoSpace-Map/Scenes/Cube.unity
     guid: c35f66cfb94e24976b459ee665bf6896
+  - enabled: 1
+    path: Assets/BlinkCalibration/BlinkCalibration.unity
+    guid: b959aaf0b8e05434b94341a24385b4ec
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 4478419d75759e44e800b81324ef7afa, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: b90efe3bab373d34fbbca430a1ceac9c, type: 2}

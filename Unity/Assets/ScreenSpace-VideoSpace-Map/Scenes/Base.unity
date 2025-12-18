@@ -1871,8 +1871,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scenes:
   - {fileID: 102900000, guid: c35f66cfb94e24976b459ee665bf6896, type: 3}
+  - {fileID: 102900000, guid: b959aaf0b8e05434b94341a24385b4ec, type: 3}
   scene_names:
   - Cube
+  - BlinkCalibration
   references:
   - key: left_eye
     reference: {fileID: 1651653801}
@@ -1999,11 +2001,7 @@ MonoBehaviour:
   left_eye_ref: {fileID: 1651653802}
   right_eye_ref: {fileID: 1864276102}
   _ipd: 0
-  textboxes:
-  - textbox: {fileID: 0}
-    print_type: 1
-  - textbox: {fileID: 0}
-    print_type: 1
+  textboxes: []
 --- !u!1 &170296696
 GameObject:
   m_ObjectHideFlags: 0
@@ -6950,7 +6948,7 @@ MonoBehaviour:
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: Cube
+            m_StringArgument: BlinkCalibration
             m_BoolArgument: 0
           m_CallState: 2
         - m_Target: {fileID: 1711207635}
